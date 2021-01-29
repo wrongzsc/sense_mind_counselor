@@ -22,6 +22,7 @@ environment:
 
 dependencies:
   integration_test: ^1.0.1
+  english_words: ^3.1.5
   flutter:
     sdk: flutter
 
