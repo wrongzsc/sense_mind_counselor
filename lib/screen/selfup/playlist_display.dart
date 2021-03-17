@@ -12,23 +12,64 @@ class PlayListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          albumInfo.fileName,
+      //
+      body: CustomScrollView(
+        slivers: <Widget>[
+          // 顶部的标题图片部分
+          buildSliverAppBar(),
+          buildSliverList(),
+        ],
+      ),
+    );
+  }
+
+  SliverAppBar buildSliverAppBar() {
+    return SliverAppBar(
+      backgroundColor: Color(0xFFF08700),
+      pinned: true,
+      snap: false,
+      floating: true,
+      // leading: Icon(Icons.home),
+      actions: <Widget>[
+        Icon(Icons.menu, color: Colors.white),
+      ],
+      title: Text(
+        "自助练习",
+        style: TextStyle(color: Colors.white),
+      ),
+      expandedHeight: 180,
+      flexibleSpace: FlexibleSpaceBar(
+        background: Row(
+          children: <Widget>[
+            Expanded(
+              child: Image.asset(
+                "assets/selfup/" + albumInfo.imagePath,
+                fit: BoxFit.scaleDown,
+              ),
+            )
+          ],
         ),
       ),
-      body: ListView.builder(
-        itemBuilder: _playChapterBuilder,
-        itemCount: albumInfo.playList.length,
-        padding: EdgeInsets.all(10.0),
-      ),
+    );
+  }
+
+  SliverList buildSliverList() {
+    return SliverList(
+      ///懒加载代理
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          ///子Item的布局
+          return _playChapterBuilder(context, index);
+        },
+        childCount: albumInfo.playList.length,
+      ), //子Item的个数
     );
   }
 
   Widget _playChapterBuilder(BuildContext context, int index) {
     final List<Chapter> playList = albumInfo.playList;
     final String imagePath = "assets/selfup/src/" + playList[index].imagePath;
-    print(imagePath);
+    // print(imagePath);
     return Container(
       decoration: BoxDecoration(
         color: Colors.orange[50],

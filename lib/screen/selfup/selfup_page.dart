@@ -13,7 +13,11 @@ class _SelfHelpPageState extends State<SelfHelpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("自助训练"),
+        title: Text(
+          "自助训练",
+          style: TextStyle(color: Colors.white),
+        ),
+        automaticallyImplyLeading: false,
       ),
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

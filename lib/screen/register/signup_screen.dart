@@ -7,7 +7,11 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("注册"),
+        title: Text(
+          "  注册",
+          style: TextStyle(color: Colors.white),
+        ),
+        automaticallyImplyLeading: false,
       ),
       body: SignUpBody(),
     );
@@ -41,34 +45,23 @@ class SignUpBody extends StatelessWidget {
             // 手机号注册
             TextField(
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.lightBlue,
-                  ),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                  ),
-                  borderSide: BorderSide(
-                    color: Color(0xFFF08700),
-                  ),
-                ),
-                icon: Icon(Icons.person),
-                hintText: "请输入手机号",
-                hintMaxLines: 1,
-                hintStyle: TextStyle(color: Colors.black38),
+                icon: Icon(Icons.keyboard_arrow_right),
+                // enabledBorder: OutlineInputBorder(
+                // borderSide: BorderSide(color: Colors.grey),
+                // borderRadius: BorderRadius.all(Radius.circular(100)),
+                // ),
+                hintText: "请输入手机号码",
+                // focusedBorder: OutlineInputBorder(
+                // borderSide: BorderSide(color: Colors.grey),
+                // borderRadius: BorderRadius.all(Radius.circular(100)),
+                // ),
                 labelStyle: TextStyle(
-                  color: Colors.black26,
+                  color: Colors.black45,
+                  fontSize: 16,
                 ),
               ),
               textAlign: TextAlign.center,
+              obscureText: true,
             ),
             // 验证码
             TextField(
@@ -92,6 +85,9 @@ class SignUpBody extends StatelessWidget {
               obscureText: true,
             ),
             // 注册按钮
+            SizedBox(
+              height: 40,
+            ),
             TextButton(
               onPressed: () {
                 // here push to mainpage

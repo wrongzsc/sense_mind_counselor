@@ -53,7 +53,7 @@ class _SigninScreenState extends State<SigninScreen> {
      */
     return Theme(
       data: new ThemeData(
-          primaryColor: Colors.amber, hintColor: Colors.greenAccent),
+          primaryColor: Colors.amber, hintColor: Colors.orangeAccent),
       child: new TextField(
         //键盘的样式
         keyboardType: TextInputType.text,
@@ -108,7 +108,7 @@ class _SigninScreenState extends State<SigninScreen> {
             //输入框内右侧的widget
             suffixIcon: Icon(Icons.account_circle),
 //            有聚焦显示颜色跟hintColor，显示在输入框的右边
-            suffixText: "后缀",
+            // suffixText: "后缀",
             contentPadding: EdgeInsets.all(5),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(11.11), //边框裁剪成11.11°角
@@ -269,7 +269,11 @@ class _SigninScreenState extends State<SigninScreen> {
     context1 = context;
     return Scaffold(
         appBar: new AppBar(
-          title: new Text('登录'),
+          title: new Text(
+            '  登录',
+            style: TextStyle(color: Colors.white),
+          ),
+          automaticallyImplyLeading: false,
         ),
         body: new ListView(
           children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sensemind_counselor/screen/counselor/counselor_info.dart';
+import 'package:sensemind_counselor/screen/counselor/counselor_info.dart';
 
 class CounselorPage extends StatefulWidget {
   CounselorPage({Key key}) : super(key: key);
@@ -11,29 +12,33 @@ class _CounselorPageState extends State<CounselorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "咨询师",
-            // style: TextStyle(
-            //   fontSize: 16.0,
-            //   fontWeight: FontWeight.w500,
-            //   color: Colors.white,
-            // ),
-          ),
+      appBar: AppBar(
+        title: Text(
+          "咨询师",
+          style: TextStyle(color: Colors.white),
+          // style: TextStyle(
+          //   fontSize: 16.0,
+          //   fontWeight: FontWeight.w500,
+          //   color: Colors.white,
+          // ),
         ),
-        body: ListView.builder(
-          itemBuilder: _listCunselItemBuilder,
-          itemCount: infos.length,
-        ));
+        automaticallyImplyLeading: false,
+      ),
+      body: ListView.builder(
+        itemBuilder: _listCunselItemBuilder,
+        itemCount: infos.length,
+      ),
+    );
   }
 
 // 构建每个咨询师显示的内容信息
   Widget _listCunselItemBuilder(BuildContext context, int index) {
     final String s = "assets/counselor/" + infos[index].image;
-    Size size = MediaQuery.of(context).size;
+    // Size size = MediaQuery.of(context).size;
     // print(s);
     return Container(
       padding: EdgeInsets.only(top: 20.0, left: 8.0, bottom: 30.0, right: 8.0),
+      margin: EdgeInsets.all(20),
       // width: size.width * 0.95,
       // height: size.height * 0.4,
       decoration: BoxDecoration(
@@ -83,7 +88,7 @@ class _CounselorPageState extends State<CounselorPage> {
               Text(
                 infos[index].qa,
                 style: TextStyle(
-                  fontSize: 18.0,
+                  fontSize: 16.0,
                   color: Colors.black87,
                 ),
               ),

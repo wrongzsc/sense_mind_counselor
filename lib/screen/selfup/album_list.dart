@@ -29,7 +29,7 @@ final List<AlbumInfo> album = [
     playList: test1,
   ),
   AlbumInfo(
-    fileName: "test啥呢",
+    fileName: "测试表单",
     imagePath: "MBCT.jpg",
     playList: test2,
   ),
@@ -49,7 +49,7 @@ final List<AlbumInfo> album = [
     playList: test1,
   ),
   AlbumInfo(
-    fileName: "test啥呢",
+    fileName: "测试表单",
     imagePath: "MBCT.jpg",
     playList: test2,
   ),

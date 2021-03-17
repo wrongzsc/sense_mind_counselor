@@ -27,6 +27,7 @@ class Body extends StatelessWidget {
     return Container(
       height: size.height,
       width: double.infinity,
+      color: Color(0xFFF08700),
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -34,43 +35,70 @@ class Body extends StatelessWidget {
             SizedBox(height: size.height * 0.15),
             Text(
               "欢迎来到量心心理",
-              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 18.0,
+                // fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
+            SizedBox(height: 10),
             Image.asset(
               "assets/initial/xlogo.png",
               height: size.height * 0.5,
               width: size.width,
               fit: BoxFit.cover,
             ),
-            RoundedButton(
-              text: "登陆",
-              color: Colors.purple,
-              textColor: Colors.red,
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return SigninScreen();
-                    },
-                  ),
-                );
-              },
+            SizedBox(
+              height: 30,
             ),
-            RoundedButton(
-              text: "注册",
-              color: kPrimaryLightColor,
-              textColor: Colors.purple,
-              press: () {
+            TextButton(
+              onPressed: () {
+                // here push to mainpage
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return SignUpScreen();
-                    },
-                  ),
+                  MaterialPageRoute(builder: (context) {
+                    return SignUpScreen();
+                  }),
                 );
               },
+              // 注册按钮
+              child: Text(" 注册 "),
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(Colors.white),
+                // backgroundColor: MaterialStateProperty.all(Colors.black12),
+                textStyle: MaterialStateProperty.all(
+                  TextStyle(
+                    fontSize: 18.0,
+                    // fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            TextButton(
+              onPressed: () {
+                // here push to mainpage
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return SigninScreen();
+                  }),
+                );
+              },
+              // 登陆按钮
+              child: Text(" 登陆 "),
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(Colors.white),
+                // backgroundColor: MaterialStateProperty.all(Colors.black12),
+                textStyle: MaterialStateProperty.all(
+                  TextStyle(
+                    fontSize: 18.0,
+                    // fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
