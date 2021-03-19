@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sensemind_counselor/main.dart';
 import 'package:sensemind_counselor/screen/selfup/album_list.dart';
 import 'package:sensemind_counselor/screen/selfup/playlist_display.dart';
-import 'package:sensemind_counselor/screen/selfup/selfup_page.dart';
-import 'package:sensemind_counselor/screen/counselor/counselor_page.dart';
-import 'package:sensemind_counselor/screen/myset/myinfo_page.dart';
 import 'package:sensemind_counselor/screen/counselor/counselor_info.dart';
 
 class HomePage extends StatefulWidget {

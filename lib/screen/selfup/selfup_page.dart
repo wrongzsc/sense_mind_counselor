@@ -14,7 +14,7 @@ class _SelfHelpPageState extends State<SelfHelpPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "自助训练",
+          "自助练习",
           style: TextStyle(color: Colors.white),
         ),
         automaticallyImplyLeading: false,
@@ -49,7 +49,7 @@ class _SelfHelpPageState extends State<SelfHelpPage> {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.green,
+          // color: Colors.green,
           borderRadius: BorderRadius.circular(12),
           image: DecorationImage(
             image: AssetImage(imagePath),

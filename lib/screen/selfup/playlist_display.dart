@@ -12,11 +12,12 @@ class PlayListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //
+      //顶部滑动
       body: CustomScrollView(
         slivers: <Widget>[
           // 顶部的标题图片部分
           buildSliverAppBar(),
+          // 内容展示
           buildSliverList(),
         ],
       ),
@@ -31,7 +32,10 @@ class PlayListScreen extends StatelessWidget {
       floating: true,
       // leading: Icon(Icons.home),
       actions: <Widget>[
-        Icon(Icons.menu, color: Colors.white),
+        Icon(
+          Icons.favorite_border_outlined,
+          color: Colors.white,
+        ),
       ],
       title: Text(
         "自助练习",
@@ -44,7 +48,7 @@ class PlayListScreen extends StatelessWidget {
             Expanded(
               child: Image.asset(
                 "assets/selfup/" + albumInfo.imagePath,
-                fit: BoxFit.scaleDown,
+                fit: BoxFit.contain,
               ),
             )
           ],
@@ -101,26 +105,42 @@ class PlayListScreen extends StatelessWidget {
             flex: 1,
           ),
           Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Text(
-                  "    " + albumInfo.playList[index].fileName,
-                  style: TextStyle(fontSize: 14.0),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  "     " +
-                      albumInfo.playList[index].timeSpan.toString() +
-                      "分钟",
-                  style: TextStyle(
-                    fontSize: 12.0,
+            child: Material(
+              // 这个地方的颜色只是为了保证统一
+              color: Colors.orange[50],
+              child: Ink(
+                child: InkWell(
+                  onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("点击成功"),
+                        duration: Duration(milliseconds: 100),
+                      ),
+                    );
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Text(
+                        "    " + albumInfo.playList[index].fileName,
+                        style: TextStyle(fontSize: 14.0),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "     " +
+                            albumInfo.playList[index].timeSpan.toString() +
+                            "分钟",
+                        style: TextStyle(
+                          fontSize: 12.0,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
             flex: 4,
           ),

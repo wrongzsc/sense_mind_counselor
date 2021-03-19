@@ -75,7 +75,7 @@ class _SigninScreenState extends State<SigninScreen> {
         //输入文本的样式
         style: TextStyle(fontSize: 20, color: Colors.black),
         //允许输入的格式(digitsOnly数字)
-        inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         //内容改变回调
         onChanged: (account) {
           print('change $account');
@@ -143,7 +143,7 @@ class _SigninScreenState extends State<SigninScreen> {
       //输入文本的样式
       style: TextStyle(fontSize: 20, color: Colors.black),
       //允许输入的格式(digitsOnly数字)
-      inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       //内容改变回调
       onChanged: (password) {
         print('change $password');
@@ -205,12 +205,14 @@ class _SigninScreenState extends State<SigninScreen> {
   Widget loginButton = new Container(
       margin: const EdgeInsets.only(
           left: 35, right: 35), //这个widget距离父控件左右35（还有个all就是距离左上右下四个方向）
-      child: new SizedBox(
+      child: SizedBox(
           //用来设置宽高，如直接使用RaisedButton则不能设置
           height: 50,
-          child: new RaisedButton(
+          child: OutlinedButton(
               //一个凸起的材质矩形按钮
-              color: Colors.orange,
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(Color(0xFFF08700))),
               child: new Text(
                 '登录',
                 style: TextStyle(color: Colors.white, fontSize: 20),
@@ -239,13 +241,13 @@ class _SigninScreenState extends State<SigninScreen> {
                     ),
                     content: new Text(_checkHint), //提示语
                     actions: <Widget>[
-                      new FlatButton(
+                      new TextButton(
                           //一个扁平的Material按钮
                           onPressed: () {
                             Navigator.of(context1).pop(); //弹窗消失
                           },
                           child: Text('取消')),
-                      new FlatButton(
+                      new TextButton(
                           //对话框按钮
                           onPressed: () {
                             if (_accountState && _passwordState) {

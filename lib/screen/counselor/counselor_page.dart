@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sensemind_counselor/screen/counselor/counselor_info.dart';
-import 'package:sensemind_counselor/screen/counselor/counselor_info.dart';
 
 class CounselorPage extends StatefulWidget {
   CounselorPage({Key key}) : super(key: key);

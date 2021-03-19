@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sensemind_counselor/components/round_button.dart';
-import 'package:sensemind_counselor/constants.dart';
 import 'package:sensemind_counselor/screen/login/signin_screen.dart';
 import 'package:sensemind_counselor/screen/register/signup_screen.dart';
-import 'package:sensemind_counselor/screen/welcome/background.dart';
 
 class WelcomeScreen2 extends StatelessWidget {
   // const WelcomeScreen2({Key key}) : super(key: key);
