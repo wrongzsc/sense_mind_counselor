@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:sensemind_counselor/constants.dart';
 import 'package:sensemind_counselor/screen/selfup/selfup_page.dart';
 import 'package:sensemind_counselor/screen/counselor/counselor_page.dart';
 import 'package:sensemind_counselor/screen/myset/myinfo_page.dart';

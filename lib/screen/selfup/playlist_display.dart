@@ -1,24 +1,64 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sensemind_counselor/screen/selfup/album_list.dart';
+import 'package:sensemind_counselor/screen/selfup/music_player/play_song.dart';
+import 'package:sensemind_counselor/screen/selfup/music_player/widget_play.dart';
 import 'package:sensemind_counselor/screen/selfup/play_list.dart';
+import 'package:provider/provider.dart';
 
-class PlayListScreen extends StatelessWidget {
-  final AlbumInfo albumInfo;
-  // final Chapter chapter;
-
+class PlayListScreen extends StatefulWidget {
   PlayListScreen({Key key, @required this.albumInfo}) : super(key: key);
+  final AlbumInfo albumInfo;
 
+  @override
+  _PlayListScreenState createState() => _PlayListScreenState(this.albumInfo);
+}
+
+class _PlayListScreenState extends State<PlayListScreen> {
+  final AlbumInfo albumInfo;
+
+  _PlayListScreenState(this.albumInfo);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //顶部滑动
-      body: CustomScrollView(
-        slivers: <Widget>[
-          // 顶部的标题图片部分
-          buildSliverAppBar(),
-          // 内容展示
-          buildSliverList(),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            flex: 10,
+            child: CustomScrollView(
+              slivers: <Widget>[
+                // 顶部的标题图片部分
+                buildSliverAppBar(),
+                // 内容展示
+                // buildSliverList(),
+                Consumer<PlaySongModel>(builder: (context, model, child) {
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        var d = albumInfo.playList[index];
+                        return GestureDetector(
+                          onTap: () {
+                            playSongs(model, index);
+                          },
+                          child: _playChapterBuilder(context, index),
+                        );
+                      },
+                      childCount: albumInfo.playList.length,
+                    ),
+                  );
+                }),
+                // _payerBar(),
+              ],
+            ),
+          ),
+          Expanded(
+            // child: AudioPlayerPage(),
+            child: PlayWidget(),
+            // child: _payerBar(),
+            flex: 1,
+          ),
         ],
       ),
     );
@@ -59,7 +99,6 @@ class PlayListScreen extends StatelessWidget {
 
   SliverList buildSliverList() {
     return SliverList(
-      ///懒加载代理
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
           ///子Item的布局
@@ -105,42 +144,26 @@ class PlayListScreen extends StatelessWidget {
             flex: 1,
           ),
           Expanded(
-            child: Material(
-              // 这个地方的颜色只是为了保证统一
-              color: Colors.orange[50],
-              child: Ink(
-                child: InkWell(
-                  onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text("点击成功"),
-                        duration: Duration(milliseconds: 100),
-                      ),
-                    );
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Text(
-                        "    " + albumInfo.playList[index].fileName,
-                        style: TextStyle(fontSize: 14.0),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "     " +
-                            albumInfo.playList[index].timeSpan.toString() +
-                            "分钟",
-                        style: TextStyle(
-                          fontSize: 12.0,
-                        ),
-                      ),
-                    ],
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Text(
+                  "    " + albumInfo.playList[index].fileName,
+                  style: TextStyle(fontSize: 14.0),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  "     " +
+                      albumInfo.playList[index].timeSpan.toString() +
+                      "分钟",
+                  style: TextStyle(
+                    fontSize: 12.0,
                   ),
                 ),
-              ),
+              ],
             ),
             flex: 4,
           ),
@@ -152,6 +175,79 @@ class PlayListScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  //
+  _payerBar() {
+    AudioPlayer player = AudioPlayer();
+    return Container(
+      // height: 100.0,
+      margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+            // 图标
+            child: ClipOval(
+              child: SvgPicture.asset(
+                "assets/selfup/src/Basketball_Isometric.svg",
+                width: 40,
+                height: 40,
+                fit: BoxFit.scaleDown,
+              ),
+            ),
+            flex: 1,
+          ),
+          // 歌曲名称信息
+          Expanded(
+            child: TextButton(
+              // 跳转进入播放全界面
+              onPressed: null,
+              // 点击上面的内容自动更新名称
+              // 点击下一首自动更新名称
+              child: Text(
+                "zhehsi yige feichang changde mignzi  buzhidao huishi shenme houguo ",
+                maxLines: 2,
+                softWrap: true,
+              ),
+            ),
+            flex: 3,
+          ),
+          // 播放暂停
+          // 图标自动更新
+          Expanded(
+            child: IconButton(
+              icon: Icon(Icons.play_arrow_outlined),
+              onPressed: () {
+                player.play("asset/selfup/audio_src/埃塞俄比亚的夜晚.mp3");
+              },
+            ),
+          ),
+          // 下一首
+          Expanded(
+            child: IconButton(
+              icon: Icon(Icons.skip_next),
+              onPressed: () {},
+            ),
+          ),
+          // 当前播放列表
+          Expanded(
+            child: IconButton(
+              icon: Icon(Icons.playlist_play_outlined),
+              onPressed: null,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void playSongs(PlaySongModel model, int index) {
+    model.playSongs(
+      albumInfo.playList,
+      index: index,
     );
   }
 }

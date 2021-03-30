@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sensemind_counselor/screen/selfup/music_player/play_song.dart';
 import 'package:sensemind_counselor/screen/welcome/welcome_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider<PlaySongModel>(
+      create: (_) => PlaySongModel()..init(),
+      child: MyApp(),
+    ),
+  );
   // todo // List<String> args  参数是不是应该用来控制这个是否第一次启动
   // 1st 注册 or 登陆
 }
 
 class MyApp extends StatelessWidget {
-  // root of app
+  // root of app·
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,10 +25,6 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFFF08700),
       ),
       home: WelcomeScreen2(),
-      // 自动跳转
-      // routes: <String, WidgetBuilder>{
-      //   '/IndexPage': (context) => RegisterPage()
-      // },
     );
   }
 }
