@@ -1,11 +1,8 @@
-import 'dart:io';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sensemind_counselor/screen/selfup/play_list.dart';
 
 // 旧版测试页面
@@ -24,16 +21,13 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
   PlayerMode mode;
 
   AudioPlayer _audioPlayer;
-  AudioCache _audioCache;
-
-  AudioPlayerState _curPlayState;
 
   Duration _duration;
   Duration _position;
 
   StreamSubscription _durSubscription;
   StreamSubscription _posSubscription;
-  StreamSubscription _PlayerCompSubscription;
+  StreamSubscription _playerCompSubscription;
   StreamSubscription _playerErrSubscription;
   StreamSubscription _playerStateSubscription;
 
@@ -43,7 +37,6 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
   @override
   //  初始化
   void initState() {
-    // TODO: implement initState
     super.initState();
     // url = 'https://luan.xyz/files/audio/ambient_c_motion.mp3';
     url = "http://119.29.64.158:8989/20分钟正念.mp3";
@@ -56,7 +49,7 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
     _audioPlayer.dispose();
     _durSubscription?.cancel();
     _posSubscription?.cancel();
-    _PlayerCompSubscription?.cancel();
+    _playerCompSubscription?.cancel();
     _playerErrSubscription?.cancel();
     _playerStateSubscription?.cancel();
     super.dispose();
@@ -71,7 +64,6 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
     _durSubscription = _audioPlayer.onDurationChanged.listen((duration) {
       setState(() => _duration = duration);
 
-      // TODO implemented for iOS, waiting for android impl
       if (Theme.of(context).platform == TargetPlatform.iOS) {
         _audioPlayer.startHeadlessService();
 
@@ -95,7 +87,7 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
             }));
 
     //播放完成
-    _PlayerCompSubscription = _audioPlayer.onPlayerCompletion.listen((event) {
+    _playerCompSubscription = _audioPlayer.onPlayerCompletion.listen((event) {
 //          _onComplete();
       setState(() {
         _position = Duration();
@@ -183,9 +175,9 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
                     activeColor: Color(0xFFF08700),
                     inactiveColor: Color(0xffffe4b5),
                     onChanged: (v) {
-                      final Position = v * _duration.inMilliseconds;
+                      final _position = v * _duration.inMilliseconds;
                       _audioPlayer
-                          .seek(Duration(milliseconds: Position.round()));
+                          .seek(Duration(milliseconds: _position.round()));
                     },
                     value: (_position != null &&
                             _duration != null &&

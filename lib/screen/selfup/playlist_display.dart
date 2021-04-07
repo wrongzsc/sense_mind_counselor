@@ -1,4 +1,3 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sensemind_counselor/screen/selfup/album_list.dart';
@@ -37,7 +36,7 @@ class _PlayListScreenState extends State<PlayListScreen> {
                   return SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        var d = albumInfo.playList[index];
+                        // var d = albumInfo.playList[index];
                         return GestureDetector(
                           onTap: () {
                             playSongs(model, index);
@@ -172,72 +171,6 @@ class _PlayListScreenState extends State<PlayListScreen> {
               Icons.favorite_outline,
             ),
             flex: 1,
-          ),
-        ],
-      ),
-    );
-  }
-
-  //
-  _payerBar() {
-    AudioPlayer player = AudioPlayer();
-    return Container(
-      // height: 100.0,
-      margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Expanded(
-            // 图标
-            child: ClipOval(
-              child: SvgPicture.asset(
-                "assets/selfup/src/Basketball_Isometric.svg",
-                width: 40,
-                height: 40,
-                fit: BoxFit.scaleDown,
-              ),
-            ),
-            flex: 1,
-          ),
-          // 歌曲名称信息
-          Expanded(
-            child: TextButton(
-              // 跳转进入播放全界面
-              onPressed: null,
-              // 点击上面的内容自动更新名称
-              // 点击下一首自动更新名称
-              child: Text(
-                "zhehsi yige feichang changde mignzi  buzhidao huishi shenme houguo ",
-                maxLines: 2,
-                softWrap: true,
-              ),
-            ),
-            flex: 3,
-          ),
-          // 播放暂停
-          // 图标自动更新
-          Expanded(
-            child: IconButton(
-              icon: Icon(Icons.play_arrow_outlined),
-              onPressed: () {
-                player.play("asset/selfup/audio_src/埃塞俄比亚的夜晚.mp3");
-              },
-            ),
-          ),
-          // 下一首
-          Expanded(
-            child: IconButton(
-              icon: Icon(Icons.skip_next),
-              onPressed: () {},
-            ),
-          ),
-          // 当前播放列表
-          Expanded(
-            child: IconButton(
-              icon: Icon(Icons.playlist_play_outlined),
-              onPressed: null,
-            ),
           ),
         ],
       ),

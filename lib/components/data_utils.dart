@@ -2,6 +2,8 @@
 /// 格式要求
 /// year -> yyyy/yy   month -> MM/M    day -> dd/d
 /// hour -> HH/H      minute -> mm/m   second -> ss/s
+
+// ignore_for_file: non_constant_identifier_names
 class DateFormats {
   static String full = 'yyyy-MM-dd HH:mm:ss';
   static String y_mo_d_h_m = 'yyyy-MM-dd HH:mm';
