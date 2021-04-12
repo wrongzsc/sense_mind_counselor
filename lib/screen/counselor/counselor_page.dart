@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sensemind_counselor/screen/counselor/counselor_info.dart';
+import 'package:sensemind_counselor/screen/counselor/trtc/page/trtcmeetingdemo/index.dart';
 
 class CounselorPage extends StatefulWidget {
   CounselorPage({Key key}) : super(key: key);
@@ -147,7 +148,11 @@ class _CounselorPageState extends State<CounselorPage> {
                     ),
                   ),
                   OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => IndexPage()),
+                      );
+                    },
                     child: Text(
                       "视频咨询",
                     ),
